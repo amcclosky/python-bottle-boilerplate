@@ -1,0 +1,13 @@
+upstream app_server {
+    server 127.0.0.1:8080 fail_timeout=0;
+}
+
+server {
+
+        server_name hello.replace.dev _;
+
+        location / {
+                proxy_pass http://app_server;
+                include /etc/nginx/proxy_params;
+        }
+}

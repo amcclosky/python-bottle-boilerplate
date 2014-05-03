@@ -14,11 +14,16 @@
         "ami_name": "hello-boilerplate {{timestamp}}"
     }],
     "provisioners": [{
+        "type": "file",
+        "source": ".debinate/build/hello-1.0.0.deb",
+        "destination": "/tmp/hello-1.0.0.deb"
+    },
+    {
         "type": "shell",
         "inline": [
             "sleep 30",
             "sudo apt-get update",
-            "sudo apt-get install -y redis-server"
+            "sudo dpkg -i /tmp/hello-1.0.0.deb"
         ]
     }]
 }
